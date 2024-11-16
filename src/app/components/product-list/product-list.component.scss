@@ -1,0 +1,9 @@
+.fixed-width-cell {
+    max-width: 80px!important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.fixed-width-header {
+  max-width: 80px!important;
+}

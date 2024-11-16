@@ -1,0 +1,44 @@
+<mat-card>
+  <mat-card-title>{{ productId ? 'Edit' : 'Add' }} Product</mat-card-title>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Barcode</mat-label>
+      <input matInput formControlName="barcode" value="productForm.get('barcode')!.value">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Image</mat-label>
+      <input matInput formControlName="image">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Tags</mat-label>
+      <mat-chip-list>
+        <mat-chip
+          *ngFor="let tag of productForm.get('tags')!.value; let i = index"
+          [removable]="true"
+          (removed)="removeTag(i)">
+          {{ tag }}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input
+          matInput
+          placeholder="New tag..."
+          [formControl]="tagCtrl"
+          (keydown.enter)="addTag()">
+      </mat-chip-list>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price" type="number">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Rating</mat-label>
+      <input matInput formControlName="rating" type="number">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">{{ productId ? 'Update' : 'Add' }}</button>
+    <button mat-button routerLink="/products">Cancel</button>
+  </form>
+</mat-card>
